@@ -30,7 +30,9 @@ public class VisitPluginRuntime : ModuleRules
 				"EnhancedInput",
 				"UMG",
                 "Paper2D",
-			}
+                "Slate",
+                "SlateCore",
+            }
 			);
 
         if (Target.bBuildEditor)
@@ -47,8 +49,7 @@ public class VisitPluginRuntime : ModuleRules
         PrivateDependencyModuleNames.AddRange(
 			new string[]
 			{
-				"Slate",
-				"SlateCore",
+				
 			}
 			);
 		

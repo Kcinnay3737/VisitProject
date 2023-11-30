@@ -69,7 +69,7 @@ void APlanMenu::BeginPlay()
 	HideActor();
 	SetFollowPlayer(true);
 
-	SetCaptureState(true);
+	SetCaptureState(false);
 }
 
 void APlanMenu::Tick(float DeltaTime)
@@ -166,6 +166,8 @@ void APlanMenu::OpenPlanMenu()
 {
 	if (_PlanWidget && !_PlanWidget->IsInViewport())
 	{
+		SetCaptureState(true);
+
 		_PlanWidget->AddToViewport();
 		Recenter();
 		_CurrHeightCamIndex = -1;
@@ -176,6 +178,8 @@ void APlanMenu::ClosePlanMenu()
 {
 	if (_PlanWidget && _PlanWidget->IsInViewport())
 	{
+		SetCaptureState(false);
+
 		_PlanWidget->RemoveFromParent();
 	}
 }
