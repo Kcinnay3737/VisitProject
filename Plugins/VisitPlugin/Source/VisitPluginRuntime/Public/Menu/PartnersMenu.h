@@ -30,10 +30,6 @@ private:
 	TSubclassOf<UUserWidget> _PartnerWidgetClass = nullptr;
 	UPROPERTY()
 	UUserWidget* _PartnerWidget = nullptr;
-	UPROPERTY(EditAnywhere, Category = "VisitData/Widget")
-	TSubclassOf<UUserWidget> _PartnerWidgetSlotClass = nullptr;
-	UPROPERTY(EditAnywhere, Category = "VisitData/Widget")
-	TSubclassOf<UUserWidget> _PartnerWidgetSpacerClass = nullptr;
 	
 	UPROPERTY(EditAnywhere, Category = "VisitData/Partner")
 	TArray<FPartnerData> _DataPartners;

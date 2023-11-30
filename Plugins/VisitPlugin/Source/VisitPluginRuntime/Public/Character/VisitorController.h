@@ -5,7 +5,7 @@
 #include "InputActionValue.h"
 #include "VisitorController.generated.h"
 
-class AMinimaps;
+class APlanMenu;
 class AVisitor;
 class UDataVisitorControl;
 class UInputAction;
@@ -185,7 +185,7 @@ public:
 
 	void SetPauseState(bool value);
 
-	AMinimaps* GetMap();
+	APlanMenu* GetMap();
 
 	TArray<UWidget*> GetAllChildWidgetsRecursive(UPanelWidget* PanelWidget);
 };

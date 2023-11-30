@@ -13,7 +13,7 @@
 #include "GameInstance/GameInstanceSubsystemVisit.h"
 #include "Interactable/Interactable.h"
 #include "Kismet/GameplayStatics.h"
-#include "Maps/Minimaps.h"
+#include "Menu/PlanMenu.h"
 #include "Tooltip/Tooltip.h"
 #include "Manager/GameStateManager.h"
 #include "Menu/BotMenu.h"
@@ -523,7 +523,7 @@ void AVisitorController::Zooming(float value, bool bZoomMap)
 
 	if (bZoomMap)
 	{
-		AMinimaps* map = GetMap();
+		APlanMenu* map = GetMap();
 		if (map)
 		{
 			map->Zooming(value * _DataVisitorControl->mapZoomSpeed);
@@ -558,7 +558,7 @@ void AVisitorController::Taping(FVector2D localPos, FVector2D platformPos)
 	if (!_DataVisitorControl) return;
 
 	//If the touch is on the map
-	AMinimaps* map = GetMap();
+	APlanMenu* map = GetMap();
 	if (map)
 	{
 		if (map->CheckPointIsOnTheMap(platformPos))
@@ -610,7 +610,7 @@ void AVisitorController::Looking(FVector2D value, bool bLookingMap)
 
 	if (bLookingMap)
 	{
-		AMinimaps* map = GetMap();
+		APlanMenu* map = GetMap();
 		if (map)
 		{
 			map->Looking(value * _DataVisitorControl->mapLookSpeed);
@@ -825,7 +825,7 @@ bool AVisitorController::CheckWidgetForPoint(UWidget* widget, FVector2D point)
 
 bool AVisitorController::CheckPointIsOnTheMap(FVector2D point)
 {
-	AMinimaps* map = GetMap();
+	APlanMenu* map = GetMap();
 	if (map)
 	{
 		if (map->CheckPointIsOnTheMap(point))
@@ -876,15 +876,9 @@ void AVisitorController::SetPauseState(bool value)
 	}
 }
 
-AMinimaps* AVisitorController::GetMap()
+APlanMenu* AVisitorController::GetMap()
 {
-	UGameInstance* gameInstance = GetGameInstance();
-	if (!gameInstance) return nullptr;
-	UGameInstanceSubsystemVisit* gameInstanceVisit =gameInstance->GetSubsystem<UGameInstanceSubsystemVisit>();
-	if (!gameInstanceVisit) return nullptr;
-	AMinimaps* map = Cast<AMinimaps>(gameInstanceVisit->GetInDictObject("Maps"));
-	if (!map) return nullptr;
-	return map;
+	return Cast<APlanMenu>(UGameplayStatics::GetActorOfClass(GetWorld(), APlanMenu::StaticClass()));
 }
 
 TArray<UWidget*> AVisitorController::GetAllChildWidgetsRecursive(UPanelWidget* PanelWidget)
