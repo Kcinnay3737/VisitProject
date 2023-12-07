@@ -2,7 +2,7 @@ BotMenu : DONE
  
 ObjectSelection :
 	• Updater le visuel des button
-	• Addapter la size de l'image de rendu
+	• Addapter la size de l'image de rendu selon l'image donnee
 	• Faire en sorte que la size du back groud s'addapte selon le nombre d'element
 
 OptionMenu :
@@ -15,18 +15,18 @@ ParterMenu :
 	• Regarder pour ajuster le layout lorsque pas beaucoup de partenaire 
 
 PlanMenu :
-	• Changer les bouton
+	• Changer le visuel des boutons
 	• Regarder pour changer le layout
 
 RoomsMenu
 	• Updater visuelle button
-	• Faire que l'image de rendu s'adapte selon l'image
+	• Faire que l'image de rendu s'adapte selon l'image donnee
  	• Faire en sorte que la size du back groud s'addapte selon le nombre d'element
 
 TopMenu :
-	• Updater le visuel de l'interupter et implementer ca fonctonnalite
+	• Updater le visuel de l'interupter et implementer ca fonctonnalite pour changer le temp
 
 StartMenu : DONE
 
 General :
-	• Faire un visuelle pour montrer les currents option selectionner
+	• Faire un visuelle pour montrer les currents bouton selectionner
