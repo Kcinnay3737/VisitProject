@@ -11,6 +11,11 @@ class VISITPLUGINRUNTIME_API UMyScrollBox : public UScrollBox
 private:
 	UPROPERTY()
 	FVector2D _LastMousePosition = FVector2D::ZeroVector;
+	UPROPERTY()
+	bool _bLastMousePositionIsSet = false;
+
+	UPROPERTY(EditAnywhere, Category = "ScrollSpeed")
+	float _ScrollSpeed = 100.0f;
 
 public:
 	UFUNCTION(BlueprintCallable)
