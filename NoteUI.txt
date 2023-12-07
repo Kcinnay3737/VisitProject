@@ -1,0 +1,32 @@
+BotMenu : DONE
+ 
+ObjectSelection :
+	• Updater le visuel des button
+	• Addapter la size de l'image de rendu
+	• Faire en sorte que la size du back groud s'addapte selon le nombre d'element
+
+OptionMenu :
+	• Mettre la section quit a l'interieur
+	• Incorporer le DLSS
+	• Updater le visuel en general
+
+ParterMenu : 	
+	• Ajouter les noms
+	• Regarder pour ajuster le layout lorsque pas beaucoup de partenaire 
+
+PlanMenu :
+	• Changer les bouton
+	• Regarder pour changer le layout
+
+RoomsMenu
+	• Updater visuelle button
+	• Faire que l'image de rendu s'adapte selon l'image
+ 	• Faire en sorte que la size du back groud s'addapte selon le nombre d'element
+
+TopMenu :
+	• Updater le visuel de l'interupter et implementer ca fonctonnalite
+
+StartMenu : DONE
+
+General :
+	• Faire un visuelle pour montrer les currents option selectionner

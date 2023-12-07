@@ -105,8 +105,6 @@ private:
 	AGameStateManager* _GameStateManager = nullptr;
 	void InitGameStateManager();
 
-	bool _bScrollBoxIsInteractable = false;
-
 	bool _bIsInGame = false;
 	UFUNCTION()
 	void OnEnterGame();
@@ -190,6 +188,4 @@ public:
 	APlanMenu* GetMap();
 
 	TArray<UWidget*> GetAllChildWidgetsRecursive(UPanelWidget* PanelWidget);
-
-	bool GetScrollBoxIsInteractable() const { return _bScrollBoxIsInteractable; }
 };

@@ -1,5 +1,6 @@
 #include "UIElement/MyScrollBox.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
+//#include "UIElement/MyButton.h"
 
 void UMyScrollBox::UpdateScrollBox(float DeltaTime)
 {
@@ -11,7 +12,9 @@ void UMyScrollBox::UpdateScrollBox(float DeltaTime)
 	FVector2D MouseLocation = FVector2D::ZeroVector;
 	bool bMousePressed = false;
 
-	if (PlayerController->IsInputKeyDown(EKeys::LeftMouseButton))
+	/*bool bButtonPressed = UMyButton::GetIsButtonCurrentlyPressed();*/
+
+	if (PlayerController->IsInputKeyDown(EKeys::LeftMouseButton)/* || bButtonPressed*/)
 	{
 		MouseLocation = UWidgetLayoutLibrary::GetMousePositionOnPlatform();
 		bMousePressed = true;
@@ -22,8 +25,8 @@ void UMyScrollBox::UpdateScrollBox(float DeltaTime)
 		{
 			PlayerController->GetInputTouchState(static_cast<ETouchIndex::Type>(i), MouseLocation.X, MouseLocation.Y, bMousePressed);
 		}
-	}	
-	
+	}
+
 	if (bMousePressed && GetCachedGeometry().IsUnderLocation(MouseLocation))
 	{
 		if (!_bLastMousePositionIsSet)

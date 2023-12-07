@@ -229,10 +229,6 @@ void AVisitorController::OnMouseAndKeyboardPressedAction(const FInputActionValue
 	if (_bPause) return;
 
 	_OldMousePosition = GetMousePos();
-	
-	_bScrollBoxIsInteractable = true;
-
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, "Test");
 }
 
 void AVisitorController::OnMouseAndKeyboardHoldingAction(const FInputActionValue& value)
@@ -263,8 +259,6 @@ void AVisitorController::OnMouseAndKeyboardHoldingAction(const FInputActionValue
 void AVisitorController::OnMouseAndKeyboardReleasedAction(const FInputActionValue& value)
 {
 	_OldMousePosition = FVector2D::ZeroVector;
-
-	_bScrollBoxIsInteractable = false;
 }
 
 //--------------------------------------------------------------------------------------------------------------
@@ -308,15 +302,6 @@ void AVisitorController::CheckPressedTouchData()
 				_AllTouchData.touchOnViewport.Add(i);
 			}
 		}
-	}
-
-	if (_AllTouchData.touchData.Num() == 1)
-	{
-		_bScrollBoxIsInteractable = true;
-	}
-	else
-	{
-		_bScrollBoxIsInteractable = false;
 	}
 }
 
@@ -376,11 +361,6 @@ void AVisitorController::CheckReleasedTouchData()
 		_AllTouchData.touchOnJoystick.Remove(key);
 		_AllTouchData.touchOnMap.Remove(key);
 		_AllTouchData.touchOnViewport.Remove(key);
-	}
-
-	if (_AllTouchData.touchData.IsEmpty())
-	{
-		_bScrollBoxIsInteractable = false;
 	}
 }
 
