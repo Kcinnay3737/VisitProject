@@ -29,6 +29,7 @@ public:
 	ARoomsMenu();
 	virtual void Tick(float DeltaTime) override;
 
+	virtual void OnClickTeleport(int index) override;
 	virtual void OnClickView(int index) override;
 	virtual void OnClickFloor(int index) override;
 
@@ -47,6 +48,8 @@ private:
 
 	UPROPERTY()
 	UScrollBox* _ScrollBoxSlot = nullptr;
+
+	bool _bShowRoom = false;
 	
 	void InitWidget();
 

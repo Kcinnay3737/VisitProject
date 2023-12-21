@@ -247,7 +247,7 @@ void APlanMenu::Taping(FVector2D textureClickPosition)
 
 		world->LineTraceMultiByChannel(hitResults, clickPos, end, ECC_Visibility, queryParams, responseParam);
 
-		for (FHitResult hitResult : hitResults)
+		for (const FHitResult& hitResult : hitResults)
 		{
 			AMapsInteractable* mapInteractable = Cast<AMapsInteractable>(hitResult.GetActor());
 			if (mapInteractable)

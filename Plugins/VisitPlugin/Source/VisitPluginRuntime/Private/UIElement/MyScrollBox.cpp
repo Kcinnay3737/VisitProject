@@ -1,6 +1,7 @@
 #include "UIElement/MyScrollBox.h"
 #include "Blueprint/WidgetLayoutLibrary.h"
-//#include "UIElement/MyButton.h"
+#include "Widgets/SWidget.h"
+#include "Components/ScrollBoxSlot.h"
 
 void UMyScrollBox::UpdateScrollBox(float DeltaTime)
 {
@@ -56,3 +57,50 @@ void UMyScrollBox::UpdateScrollBox(float DeltaTime)
 		_bLastMousePositionIsSet = false;
 	}
 }
+
+void UMyScrollBox::UpdateSpacing()
+{
+	int32 NumChildren = GetChildrenCount();
+	for (int32 i = 1; i < NumChildren; i++)
+	{
+		UWidget* ChildWidget = GetChildAt(i);
+		if (ChildWidget)
+		{
+			UScrollBoxSlot* ScrollBoxSlot = Cast<UScrollBoxSlot>(ChildWidget->Slot);
+			if (ScrollBoxSlot)
+			{
+				FMargin NewPadding = Orientation == EOrientation::Orient_Horizontal ? FMargin(_SpaceBetweenElement, 0.0f, 0.0f, 0.0f) : FMargin(0.0f, _SpaceBetweenElement, 0.0f, 0.0f);
+				ScrollBoxSlot->SetPadding(NewPadding);
+			}
+		}
+	}
+}
+
+void UMyScrollBox::OnSlotAdded(UPanelSlot* AddedSlot)
+{
+	Super::OnSlotAdded(AddedSlot);
+	UpdateSpacing();
+}
+
+void UMyScrollBox::OnSlotRemoved(UPanelSlot* RemovedSlot)
+{
+	Super::OnSlotRemoved(RemovedSlot);
+	UpdateSpacing();
+}
+
+#if WITH_EDITOR
+void UMyScrollBox::PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent)
+{
+	Super::PostEditChangeProperty(PropertyChangedEvent);
+
+	FProperty* Property = PropertyChangedEvent.Property;
+	if (Property)
+	{
+		if (Property->GetFName() == GET_MEMBER_NAME_CHECKED(UMyScrollBox, _SpaceBetweenElement)
+			|| Property->GetFName() == GET_MEMBER_NAME_CHECKED(UMyScrollBox, Orientation))
+		{
+			UpdateSpacing();
+		}	
+	}
+}
+#endif

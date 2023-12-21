@@ -17,7 +17,22 @@ private:
 	UPROPERTY(EditAnywhere, Category = "ScrollSpeed")
 	float _ScrollSpeed = 100.0f;
 
+	UPROPERTY(EditAnywhere, Category = "Spacing")
+	float _SpaceBetweenElement = 0.0f;
+
 public:
 	UFUNCTION(BlueprintCallable)
 	void UpdateScrollBox(float DeltaTime);
+
+	UFUNCTION(BlueprintCallable)
+	void UpdateSpacing();
+
+protected:
+	virtual void OnSlotAdded(UPanelSlot* AddedSlot) override;
+	virtual void OnSlotRemoved(UPanelSlot* RemovedSlot) override;
+
+private:
+#if WITH_EDITOR
+	virtual void PostEditChangeProperty(FPropertyChangedEvent& PropertyChangedEvent) override;
+#endif
 };

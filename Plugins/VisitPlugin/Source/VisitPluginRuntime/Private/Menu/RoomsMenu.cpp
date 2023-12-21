@@ -31,6 +31,15 @@ void ARoomsMenu::Tick(float DeltaTime)
 
 }
 
+void ARoomsMenu::OnClickTeleport(int index)
+{
+	Super::OnClickTeleport(index);
+	if (_bShowRoom)
+	{
+		ViewRoom(index);
+	}
+}
+
 void ARoomsMenu::OnClickView(int index)
 {
 	ViewRoom(index);
@@ -185,6 +194,7 @@ void ARoomsMenu::OnBotMenuStateChange(EBotMenuState BotMenuState)
 
 void ARoomsMenu::ViewRoom(int Index)
 {
+	_bShowRoom = true;
 	UFunction* Function = _RoomsWidget->FindFunction(FName("ViewRoom"));
 	if (Function)
 	{
@@ -197,6 +207,7 @@ void ARoomsMenu::ViewRoom(int Index)
 
 void ARoomsMenu::HideRoom()
 {
+	_bShowRoom = false;
 	UFunction* Function = _RoomsWidget->FindFunction(FName("HideRoom"));
 	if (Function)
 	{

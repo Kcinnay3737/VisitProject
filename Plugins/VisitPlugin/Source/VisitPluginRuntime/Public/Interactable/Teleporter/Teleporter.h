@@ -32,7 +32,7 @@ public:
 	virtual void Tick(float DeltaTime) override;
 
 	UFUNCTION()
-	void OnClickTeleport(int index);
+	virtual void OnClickTeleport(int index);
 	UFUNCTION()
 	virtual void OnClickView(int index);
 	UFUNCTION()
