@@ -17,6 +17,7 @@ public:
 	float secondaryScreenPercent = 100.0f;
 	FString windowMode = "Fullscreen";
 	FString FPS = "Unlimited";
+	bool useDLSS = false;
 	bool useTSR = false;
 	bool useVSYNC = true;
 };
@@ -37,6 +38,7 @@ public:
 	void SetSecondaryScreenPercent(float value);
 	void SetWindowMode(FString value);
 	void SetFPS(FString value);
+	void SetDLSS(bool value);
 	void SetTSR(bool value);
 	void SetVSYNC(bool value);
 	FDataPerformance GetDataPerformance();

@@ -169,6 +169,26 @@ void UGameInstanceSubsystemVisit::SetFPS(FString value)
     }
 }
 
+void UGameInstanceSubsystemVisit::SetDLSS(bool value)
+{
+    if (GEngine)
+    {
+        FString command = "";
+        if (value)
+        {
+            command = "r.Streamline.DLSSG.Enable 1";
+        }
+        else
+        {
+            command = "r.Streamline.DLSSG.Enable 0";
+        }
+        
+        GEngine->Exec(NULL, *command);
+
+        _DataPerformance.useDLSS = value;
+    }
+}
+
 void UGameInstanceSubsystemVisit::SetTSR(bool value)
 {
     if (value)
@@ -209,6 +229,7 @@ void UGameInstanceSubsystemVisit::InitOption()
         SetScreenPercent(_DataPerformance.screenPercent);
         SetSecondaryScreenPercent(_DataPerformance.secondaryScreenPercent);
         SetFPS(_DataPerformance.FPS);
+        SetDLSS(_DataPerformance.useDLSS);
         SetTSR(_DataPerformance.useTSR);
         SetVSYNC(_DataPerformance.useVSYNC);
         _bOptionIsInit = true;

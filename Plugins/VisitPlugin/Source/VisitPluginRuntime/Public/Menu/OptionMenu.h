@@ -74,6 +74,8 @@ private:
 	UFUNCTION()
 	void OnComboBoxFPSChanged(FString SelectedItem, ESelectInfo::Type SelectionType);
 	UFUNCTION()
+	void OnCheckBoxDLSSChanged(bool bIsChecked);
+	UFUNCTION()
 	void OnCheckBoxTSRChanged(bool bIsChecked);
 	UFUNCTION()
 	void OnCheckBoxVSYNCChanged(bool bIsChecked);

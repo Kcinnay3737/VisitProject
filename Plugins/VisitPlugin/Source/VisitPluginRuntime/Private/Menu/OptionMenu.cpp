@@ -126,6 +126,14 @@ void AOptionMenu::InitOptionWidget()
 		ComboBoxFPS->OnSelectionChanged.AddDynamic(this, &AOptionMenu::OnComboBoxFPSChanged);
 	}
 
+	UCheckBox* CheckBoxDLSS = Cast<UCheckBox>(_OptionWidget->GetWidgetFromName("CheckBox_DLSS"));
+	if (CheckBoxDLSS)
+	{
+		CheckBoxDLSS->SetIsChecked(DataPerformance.useDLSS);
+
+		CheckBoxDLSS->OnCheckStateChanged.AddDynamic(this, &AOptionMenu::OnCheckBoxDLSSChanged);
+	}
+
 	UCheckBox* CheckBoxTSR = Cast<UCheckBox>(_OptionWidget->GetWidgetFromName("CheckBox_TSR"));
 	if (CheckBoxTSR)
 	{
@@ -281,6 +289,14 @@ void AOptionMenu::OnComboBoxFPSChanged(FString SelectedItem, ESelectInfo::Type S
 	if (!GameInstanceSubsystemVisit) return;
 
 	GameInstanceSubsystemVisit->SetFPS(SelectedItem);
+}
+
+void AOptionMenu::OnCheckBoxDLSSChanged(bool bIsChecked)
+{
+	UGameInstanceSubsystemVisit* GameInstanceSubsystemVisit = GetGameInstanceSubsystemVisit();
+	if (!GameInstanceSubsystemVisit) return;
+
+	GameInstanceSubsystemVisit->SetDLSS(bIsChecked);
 }
 
 void AOptionMenu::OnCheckBoxTSRChanged(bool bIsChecked)
