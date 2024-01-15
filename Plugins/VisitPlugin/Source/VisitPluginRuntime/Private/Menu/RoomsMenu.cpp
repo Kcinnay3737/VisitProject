@@ -98,6 +98,12 @@ void ARoomsMenu::InitWidget()
 			UPanelSlot* PanelSlot = ScrollBoxSlotFloor->AddChild(Slot);
 		}
 	}
+
+	UButton* ButtonRender = Cast<UButton>(_RoomsWidget->GetWidgetFromName(FName("Button_Render")));
+	if (ButtonRender)
+	{
+		ButtonRender->OnClicked.AddDynamic(this, &ARoomsMenu::OnClickRenderImage);
+	}
 }
 
 void ARoomsMenu::OpenMenu()
@@ -107,7 +113,8 @@ void ARoomsMenu::OpenMenu()
 	if (_Floors.IsEmpty()) return;
 
 	HideRoom();
-	SelectFloor(_Floors[0]);
+	//SelectFloor(_Floors[0]);
+	SelectFloor("");
 }
 
 void ARoomsMenu::CloseMenu()
@@ -116,10 +123,26 @@ void ARoomsMenu::CloseMenu()
 	HideRoom();
 	_RoomsWidget->RemoveFromParent();
 	_ButtonTeleport.Empty();
+
+	UFunction* Function = _RoomsWidget->FindFunction(FName("HightLightStep"));
+	if (Function)
+	{
+		FParamsHightLight Param = FParamsHightLight();
+		Param.Index = -1;
+		_RoomsWidget->ProcessEvent(Function, &Param);
+	}
 }
 
 void ARoomsMenu::SelectFloor(FString Floor)
 {
+	UFunction* Function = _RoomsWidget->FindFunction(FName("HightLightStep"));
+	if (Function && Floor != "")
+	{
+		FParamsHightLight Param = FParamsHightLight();
+		Param.Index = _Floors.Find(Floor);
+		_RoomsWidget->ProcessEvent(Function, &Param);
+	}
+
 	if (!_ScrollBoxSlot)
 	{
 		_ScrollBoxSlot = Cast<UScrollBox>(_RoomsWidget->GetWidgetFromName("ScrollBox_Slot"));
@@ -133,13 +156,15 @@ void ARoomsMenu::SelectFloor(FString Floor)
 	{
 		_ScrollBoxSlot->ClearChildren();
 		_ButtonTeleport.Empty();
+		_DictIndexToArrayIndex.Empty();
 		int Count = 0;
+		int ArrayCount = 0;
 		for (FTeleportData& TeleportData : _TeleportData)
 		{
 			int CurrCount = Count;
 			Count++;
 
-			if (!TeleportData.Floor.Equals(Floor)) continue;
+			if (!TeleportData.Floor.Equals(Floor) && Floor != "") continue;
 
 			UUserWidget* Slot = CreateWidget<UUserWidget>(PlayerController, _RoomsSlotWidgetClass);
 			if (!Slot) continue;
@@ -176,6 +201,10 @@ void ARoomsMenu::SelectFloor(FString Floor)
 			}
 
 			UPanelSlot* PanelSlot = _ScrollBoxSlot->AddChild(Slot);
+
+			_DictIndexToArrayIndex.Add(CurrCount, ArrayCount);
+
+			ArrayCount++;
 		}
 	}
 }
@@ -199,10 +228,19 @@ void ARoomsMenu::ViewRoom(int Index)
 	if (Function)
 	{
 		FParamsViewRoom Param = FParamsViewRoom();
-		Param.RoomName = _TeleportData[Index].PlaceName;
 		Param.Texture = _TeleportData[Index].Thumbnail;
 		_RoomsWidget->ProcessEvent(Function, &Param);
 	}
+
+	Function = _RoomsWidget->FindFunction(FName("HightLightSlot"));
+	if (Function)
+	{
+		FParamsHightLight Param = FParamsHightLight();
+		Param.Index = _DictIndexToArrayIndex[Index];
+		_RoomsWidget->ProcessEvent(Function, &Param);
+	}
+
+	_CurrViewRoomIndex = Index;
 }
 
 void ARoomsMenu::HideRoom()
@@ -212,5 +250,13 @@ void ARoomsMenu::HideRoom()
 	if (Function)
 	{
 		_RoomsWidget->ProcessEvent(Function, nullptr);
+	}
+}
+
+void ARoomsMenu::OnClickRenderImage()
+{
+	if (_bShowRoom)
+	{
+		OnClickTeleport(_CurrViewRoomIndex);
 	}
 }

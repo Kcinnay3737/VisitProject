@@ -47,11 +47,11 @@ void ATopMenu::ShowWidget()
 		{
 			_TopWidget->AddToViewport();
 
-			UFunction* Function = _TopWidget->FindFunction(FName("OnShowWidget"));
-			if (Function)
-			{
-				_TopWidget->ProcessEvent(Function, nullptr);
-			}
+			//UFunction* Function = _TopWidget->FindFunction(FName("OnShowWidget"));
+			//if (Function)
+			//{
+			//	_TopWidget->ProcessEvent(Function, nullptr);
+			//}
 		}
 		return;
 	}
@@ -66,49 +66,49 @@ void ATopMenu::ShowWidget()
 	if (!_TopWidget) return;
 	_TopWidget->AddToViewport();
 
-	UFunction* Function = _TopWidget->FindFunction(FName("OnShowWidget"));
-	if (Function)
-	{
-		_TopWidget->ProcessEvent(Function, nullptr);
-	}
+	//UFunction* Function = _TopWidget->FindFunction(FName("OnShowWidget"));
+	//if (Function)
+	//{
+	//	_TopWidget->ProcessEvent(Function, nullptr);
+	//}
 
-	_ButtonOpenClose = Cast<UButton>(_TopWidget->GetWidgetFromName(FName("Button_OpenClose")));
-	if (_ButtonOpenClose)
-	{
-		_ButtonOpenClose->OnClicked.AddDynamic(this, &ATopMenu::OnOpenCloseMenuPressed);
-	}
+	//_ButtonOpenClose = Cast<UButton>(_TopWidget->GetWidgetFromName(FName("Button_OpenClose")));
+	//if (_ButtonOpenClose)
+	//{
+	//	_ButtonOpenClose->OnClicked.AddDynamic(this, &ATopMenu::OnOpenCloseMenuPressed);
+	//}
 
-	UScrollBox* ScrollBoxPartner = Cast<UScrollBox>(_TopWidget->GetWidgetFromName(FName("ScrollBox_Partner")));
-	if (ScrollBoxPartner && _DataAssetPartner)
-	{
-		for (auto& Elem : _DataAssetPartner->DataPartner)
-		{
-			FString& PartnerName = Elem.Key;
-			FDataPartner& DataPartner = Elem.Value;
-
-			UUserWidget* Slot = CreateWidget<UUserWidget>(PlayerController, _SlotPartnerWidgetClass);
-			if (!Slot) continue;
-
-			UImage* ImagePartnerLogo = Cast<UImage>(Slot->GetWidgetFromName(FName("Image_PartnerLogo")));
-			if (ImagePartnerLogo)
-			{
-				ImagePartnerLogo->SetBrushFromTexture(DataPartner.PartnerLogo, false);
-			}
-
-			UTextBlock* TextBlockPartner = Cast<UTextBlock>(Slot->GetWidgetFromName(FName("TextBlock_Partner")));
-			if (TextBlockPartner)
-			{
-				TextBlockPartner->SetText(FText::FromString(PartnerName));
-			}
-
-			UPanelSlot* PanelSlot = ScrollBoxPartner->AddChild(Slot);
-			UScrollBoxSlot* ScrollBoxSlot = Cast<UScrollBoxSlot>(PanelSlot);
-			if (ScrollBoxSlot)
-			{
-				
-			}
-		}
-	}
+	//UScrollBox* ScrollBoxPartner = Cast<UScrollBox>(_TopWidget->GetWidgetFromName(FName("ScrollBox_Partner")));
+	//if (ScrollBoxPartner && _DataAssetPartner)
+	//{
+	//	for (auto& Elem : _DataAssetPartner->DataPartner)
+	//	{
+	//		FString& PartnerName = Elem.Key;
+	//		FDataPartner& DataPartner = Elem.Value;
+	//
+	//		UUserWidget* Slot = CreateWidget<UUserWidget>(PlayerController, _SlotPartnerWidgetClass);
+	//		if (!Slot) continue;
+	//
+	//		UImage* ImagePartnerLogo = Cast<UImage>(Slot->GetWidgetFromName(FName("Image_PartnerLogo")));
+	//		if (ImagePartnerLogo)
+	//		{
+	//			ImagePartnerLogo->SetBrushFromTexture(DataPartner.PartnerLogo, false);
+	//		}
+	//
+	//		UTextBlock* TextBlockPartner = Cast<UTextBlock>(Slot->GetWidgetFromName(FName("TextBlock_Partner")));
+	//		if (TextBlockPartner)
+	//		{
+	//			TextBlockPartner->SetText(FText::FromString(PartnerName));
+	//		}
+	//
+	//		UPanelSlot* PanelSlot = ScrollBoxPartner->AddChild(Slot);
+	//		UScrollBoxSlot* ScrollBoxSlot = Cast<UScrollBoxSlot>(PanelSlot);
+	//		if (ScrollBoxSlot)
+	//		{
+	//			
+	//		}
+	//	}
+	//}
 }
 
 void ATopMenu::HideWidget()
@@ -122,36 +122,36 @@ void ATopMenu::HideWidget()
 
 void ATopMenu::OpenMenu()
 {
-	if (!_TopWidget) return;
-	UFunction* Function = _TopWidget->FindFunction(FName("OpenMenu"));
-	if (Function)
-	{
-		_TopWidget->ProcessEvent(Function, nullptr);
-	}
-	_bIsOpen = true;
+	//if (!_TopWidget) return;
+	//UFunction* Function = _TopWidget->FindFunction(FName("OpenMenu"));
+	//if (Function)
+	//{
+	//	_TopWidget->ProcessEvent(Function, nullptr);
+	//}
+	//_bIsOpen = true;
 }
 
 void ATopMenu::CloseMenu()
 {
-	if (!_TopWidget) return;
-	UFunction* Function = _TopWidget->FindFunction(FName("CloseMenu"));
-	if (Function)
-	{
-		_TopWidget->ProcessEvent(Function, nullptr);
-	}
-	_bIsOpen = false;
+	//if (!_TopWidget) return;
+	//UFunction* Function = _TopWidget->FindFunction(FName("CloseMenu"));
+	//if (Function)
+	//{
+	//	_TopWidget->ProcessEvent(Function, nullptr);
+	//}
+	//_bIsOpen = false;
 }
 
 void ATopMenu::OnOpenCloseMenuPressed()
 {
-	if (_bIsOpen)
-	{
-		CloseMenu();
-	}
-	else
-	{
-		OpenMenu();
-	}
+	//if (_bIsOpen)
+	//{
+	//	CloseMenu();
+	//}
+	//else
+	//{
+	//	OpenMenu();
+	//}
 }
 
 void ATopMenu::OnBotMenuStateChange(EBotMenuState BotMenuState)

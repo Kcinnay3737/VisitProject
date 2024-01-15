@@ -15,9 +15,16 @@ struct VISITPLUGINRUNTIME_API FParamsViewRoom
 	GENERATED_BODY()
 public:
 	UPROPERTY()
-	FText RoomName = FText::GetEmpty();
-	UPROPERTY()
 	UTexture2D* Texture = nullptr;
+};
+
+USTRUCT(BlueprintType)
+struct VISITPLUGINRUNTIME_API FParamsHightLight
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY()
+	int Index = 0;
 };
 
 UCLASS()
@@ -49,8 +56,13 @@ private:
 	UPROPERTY()
 	UScrollBox* _ScrollBoxSlot = nullptr;
 
+	UPROPERTY()
+	TMap<int, int> _DictIndexToArrayIndex;
+
 	bool _bShowRoom = false;
 	
+	int _CurrViewRoomIndex = 0;
+
 	void InitWidget();
 
 	UFUNCTION()
@@ -66,4 +78,7 @@ private:
 
 	void ViewRoom(int Index);
 	void HideRoom();
+
+	UFUNCTION()
+	void OnClickRenderImage();
 };

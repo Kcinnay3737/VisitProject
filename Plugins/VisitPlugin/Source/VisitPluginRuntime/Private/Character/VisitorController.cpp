@@ -56,9 +56,16 @@ void AVisitorController::BeginPlay()
 		SetShowMouseCursor(false);
 		bEnableClickEvents = false;
 		bEnableMouseOverEvents = false;
-
+		
 		bEnableTouchEvents = true;
 		bEnableTouchOverEvents = true;
+
+		//SetShowMouseCursor(true);
+		//bEnableClickEvents = true;
+		//bEnableMouseOverEvents = true;
+
+		//bEnableTouchEvents = true;
+		//bEnableTouchOverEvents = true;
 		break;
 	default:
 		break;

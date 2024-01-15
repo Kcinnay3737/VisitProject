@@ -20,19 +20,19 @@ private:
 	TSubclassOf<UUserWidget> _TopWidgetClass = nullptr;
 	UPROPERTY()
 	UUserWidget* _TopWidget = nullptr;
-	UPROPERTY(EditAnywhere, Category = "VisitData/Widget")
-	TSubclassOf<UUserWidget> _SlotPartnerWidgetClass = nullptr;
-	UPROPERTY()
-	TArray<UUserWidget*> _SlotWidget;
-
-	UPROPERTY(EditAnywhere, Category = "VisitData/Partner")
-	UDataAssetPartner* _DataAssetPartner = nullptr;
+	//UPROPERTY(EditAnywhere, Category = "VisitData/Widget")
+	//TSubclassOf<UUserWidget> _SlotPartnerWidgetClass = nullptr;
+	//UPROPERTY()
+	//TArray<UUserWidget*> _SlotWidget;
+	//
+	//UPROPERTY(EditAnywhere, Category = "VisitData/Partner")
+	//UDataAssetPartner* _DataAssetPartner = nullptr;
 
 	UPROPERTY()
 	AGameStateManager* _GameStateManager = nullptr;
 
-	UPROPERTY()
-	UButton* _ButtonOpenClose = nullptr;
+	//UPROPERTY()
+	//UButton* _ButtonOpenClose = nullptr;
 
 	bool _bIsOpen = false;
 

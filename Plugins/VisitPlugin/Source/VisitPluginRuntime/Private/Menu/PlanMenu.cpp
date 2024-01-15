@@ -457,7 +457,7 @@ void APlanMenu::StepDown()
 
 void APlanMenu::Recenter()
 {
-	GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, "Test");
+	//GEngine->AddOnScreenDebugMessage(-1, 5, FColor::Blue, "Test");
 	SetFollowPlayer(true);
 	_StepSetManually = false;
 }
