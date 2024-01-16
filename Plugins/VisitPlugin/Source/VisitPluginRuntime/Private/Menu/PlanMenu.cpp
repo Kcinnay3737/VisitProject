@@ -120,7 +120,7 @@ void APlanMenu::InitWidget()
 		ScrollBoxFloor->ClearChildren();
 		_ButtonIndex.Empty();
 
-		for (int i = 0; i < _DataHeightCam.Num(); i++)
+		for (int i = _DataHeightCam.Num() - 1; i >= 0 ; i--)
 		{
 			UUserWidget* Slot = CreateWidget<UUserWidget>(PlayerController, _FloorSlotWidgetClass);
 			if (!Slot) continue;
@@ -382,6 +382,18 @@ void APlanMenu::FollowPlayer()
 
 void APlanMenu::CheckCameraHeight()
 {
+	if (_LastHeightCamIndex != _CurrHeightCamIndex)
+	{
+		UFunction* Function = _PlanWidget->FindFunction(FName("SelectFloor"));
+		if (Function)
+		{
+			FParamsFloorHightLight Param = FParamsFloorHightLight();
+			Param.Index = (_DataHeightCam.Num() - 1) - _CurrHeightCamIndex;
+			_PlanWidget->ProcessEvent(Function, &Param);
+		}
+	}
+	_LastHeightCamIndex = _CurrHeightCamIndex;
+
 	if (_DataHeightCam.Num() == 0)
 	{
 		_CurrPosZ = GetActorLocation().Z;

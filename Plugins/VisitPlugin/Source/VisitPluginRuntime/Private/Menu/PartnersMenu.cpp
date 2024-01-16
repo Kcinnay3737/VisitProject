@@ -66,6 +66,12 @@ void APartnersMenu::OpenPlanMenu()
 {
 	if (_PartnerWidget && !_PartnerWidget->IsInViewport())
 	{
+		UFunction* Function = _PartnerWidget->FindFunction(FName("OnOpen"));
+		if (Function)
+		{
+			_PartnerWidget->ProcessEvent(Function, nullptr);	
+		}
+
 		_PartnerWidget->AddToViewport();
 	}
 }

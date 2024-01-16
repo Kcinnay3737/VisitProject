@@ -13,6 +13,7 @@ class UInputMappingContext;
 class AGameStateManager;
 class UWidget;
 class UPanelWidget;
+class APresetSelectionMenu;
 
 UENUM(BlueprintType)
 enum class EIgnoreState : uint8
@@ -67,6 +68,9 @@ public:
 
 protected:
 	virtual void BeginPlay() override;
+
+	UPROPERTY()
+	APresetSelectionMenu* _PresetSelectionMenu = nullptr;
 
 	//Input -------------------------------------
 	UPROPERTY(EditAnywhere, Category = "VisitData/InputMappingContext")

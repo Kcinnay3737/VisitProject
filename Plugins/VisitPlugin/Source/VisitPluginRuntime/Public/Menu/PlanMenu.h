@@ -14,6 +14,15 @@ class USceneComponent;
 class UUserWidget;
 
 USTRUCT(BlueprintType)
+struct VISITPLUGINRUNTIME_API FParamsFloorHightLight
+{
+	GENERATED_BODY()
+public:
+	UPROPERTY()
+	int Index = 0;
+};
+
+USTRUCT(BlueprintType)
 struct VISITPLUGINRUNTIME_API FSpriteVisitor
 {
 	GENERATED_BODY()
@@ -119,6 +128,7 @@ private:
 
 	float _CurrPosZ = 0.0f;
 	int _CurrHeightCamIndex = -1;
+	int _LastHeightCamIndex = -1;
 	bool _FollowPlayer = false;
 	bool _StepSetManually = false;
 

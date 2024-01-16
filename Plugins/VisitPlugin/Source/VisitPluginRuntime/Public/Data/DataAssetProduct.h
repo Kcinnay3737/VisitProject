@@ -2,29 +2,26 @@
 
 #include "CoreMinimal.h"
 #include "Engine/DataAsset.h"
-#include "DataAssetPartner.generated.h"
+#include "DataAssetProduct.generated.h"
 
 class UTexture2D;
 
 USTRUCT(BlueprintType)
-struct VISITPLUGINRUNTIME_API FDataPartner
+struct VISITPLUGINRUNTIME_API FDataProduct
 {
 	GENERATED_BODY()
 public:
 	UPROPERTY(EditAnywhere)
-	UTexture2D* Image = nullptr;
-	UPROPERTY(EditAnywhere)
-	FString Link = "";
+	UTexture2D* _Image = nullptr;
 	UPROPERTY(EditAnywhere)
 	FString Description = "";
 };
 
 UCLASS()
-class VISITPLUGINRUNTIME_API UDataAssetPartner : public UDataAsset
+class VISITPLUGINRUNTIME_API UDataAssetProduct : public UDataAsset
 {
 	GENERATED_BODY()
-
 public:
 	UPROPERTY(EditAnywhere)
-	TMap<FString, FDataPartner> PartnerNameData;
+	TMap<FString, FDataProduct> ProductNameData;
 };

@@ -18,6 +18,8 @@ public:
 	UTexture2D* PartnerImage = nullptr;
 	UPROPERTY(EditAnywhere)
 	FString ParterURL = "";
+	UPROPERTY(EditAnywhere)
+	FString PartnerDescription = "";
 };
 
 UCLASS()

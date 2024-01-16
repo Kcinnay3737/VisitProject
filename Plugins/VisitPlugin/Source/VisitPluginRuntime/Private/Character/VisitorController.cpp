@@ -17,6 +17,7 @@
 #include "Tooltip/Tooltip.h"
 #include "Manager/GameStateManager.h"
 #include "Menu/BotMenu.h"
+#include "Menu/PresetSelectionMenu.h"
 
 
 AVisitorController::AVisitorController()
@@ -59,19 +60,14 @@ void AVisitorController::BeginPlay()
 		
 		bEnableTouchEvents = true;
 		bEnableTouchOverEvents = true;
-
-		//SetShowMouseCursor(true);
-		//bEnableClickEvents = true;
-		//bEnableMouseOverEvents = true;
-
-		//bEnableTouchEvents = true;
-		//bEnableTouchOverEvents = true;
 		break;
 	default:
 		break;
 	}
 
 	HideActor();
+
+	_PresetSelectionMenu = Cast<APresetSelectionMenu>(UGameplayStatics::GetActorOfClass(GetWorld(), APresetSelectionMenu::StaticClass()));
 }
 
 void AVisitorController::Tick(float DeltaTime)
@@ -168,11 +164,21 @@ void AVisitorController::OnEnterGame()
 	_bIsInGame = true;
 
 	HideActor();
+
+	if (_DataVisitorControl && _DataVisitorControl->inputType == EInputType::IT_Touch)
+	{
+		InitJoystickWidget();
+	}
 }
 
 void AVisitorController::OnExitGame()
 {
 	_bIsInGame = false;
+
+	if (_DataVisitorControl && _DataVisitorControl->inputType == EInputType::IT_Touch)
+	{
+		HideJoystickWidget();
+	}
 }
 
 void AVisitorController::OnPlayerCanInteract()
@@ -599,6 +605,11 @@ void AVisitorController::Taping(FVector2D localPos, FVector2D platformPos)
 		bool bHit = world->LineTraceSingleByChannel(hitResult, startPos, endPos, ECC_Visibility, traceParams);
 		if (bHit)
 		{
+			if (_PresetSelectionMenu)
+			{
+				_PresetSelectionMenu->OnTouchActor(hitResult.GetActor());
+			}
+
 			AInteractable* interactable = Cast<AInteractable>(hitResult.GetActor());
 			if (interactable)
 			{
