@@ -18,7 +18,7 @@ class VISITPLUGINRUNTIME_API ATopMenu : public AActor
 private:
 	UPROPERTY(EditAnywhere, Category = "VisitData/Widget")
 	TSubclassOf<UUserWidget> _TopWidgetClass = nullptr;
-	UPROPERTY()
+	UPROPERTY(BlueprintReadWrite, meta = (AllowPrivateAccess = true))
 	UUserWidget* _TopWidget = nullptr;
 	//UPROPERTY(EditAnywhere, Category = "VisitData/Widget")
 	//TSubclassOf<UUserWidget> _SlotPartnerWidgetClass = nullptr;
@@ -44,6 +44,9 @@ protected:
 	virtual void BeginPlay() override;
 
 private:	
+	UFUNCTION(BlueprintCallable)
+	void InitWidget();
+
 	UFUNCTION()
 	void ShowWidget();
 	UFUNCTION()

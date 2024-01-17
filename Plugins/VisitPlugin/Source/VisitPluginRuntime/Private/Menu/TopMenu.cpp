@@ -31,12 +31,27 @@ void ATopMenu::BeginPlay()
 	{
 		BotMenu->OnBotMenuStateChange.AddDynamic(this, &ATopMenu::OnBotMenuStateChange);
 	}
+
+	InitWidget();
 }
 
 void ATopMenu::Tick(float DeltaTime)
 {
 	Super::Tick(DeltaTime);
 
+}
+
+void ATopMenu::InitWidget()
+{
+	if (_TopWidget) return;
+
+	if (!_TopWidgetClass) return;
+	UWorld* World = GetWorld();
+	if (!World) return;
+	APlayerController* PlayerController = World->GetFirstPlayerController();
+	if (!PlayerController) return;
+
+	_TopWidget = CreateWidget<UUserWidget>(PlayerController, _TopWidgetClass);
 }
 
 void ATopMenu::ShowWidget()
@@ -53,18 +68,13 @@ void ATopMenu::ShowWidget()
 			//	_TopWidget->ProcessEvent(Function, nullptr);
 			//}
 		}
-		return;
 	}
 
-	if (!_TopWidgetClass) return;
-	UWorld* World = GetWorld();
-	if (!World) return;
-	APlayerController* PlayerController = World->GetFirstPlayerController();
-	if (!PlayerController) return;
-
-	_TopWidget = CreateWidget<UUserWidget>(PlayerController, _TopWidgetClass);
-	if (!_TopWidget) return;
-	_TopWidget->AddToViewport();
+	UFunction* Function = _TopWidget->FindFunction(FName("ResetAnimation"));
+	if (Function)
+	{
+		_TopWidget->ProcessEvent(Function, nullptr);
+	}
 
 	//UFunction* Function = _TopWidget->FindFunction(FName("OnShowWidget"));
 	//if (Function)

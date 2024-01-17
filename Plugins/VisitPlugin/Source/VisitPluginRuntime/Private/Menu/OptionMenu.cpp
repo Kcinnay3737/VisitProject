@@ -22,9 +22,9 @@ void AOptionMenu::BeginPlay()
 	_GameStateManager = Cast<AGameStateManager>(UGameplayStatics::GetActorOfClass(GetWorld(), AGameStateManager::StaticClass()));
 	if (_GameStateManager)
 	{
-		_GameStateManager->OnEnterGameState.AddDynamic(this, &AOptionMenu::EnableOptionButton);
+		//_GameStateManager->OnEnterGameState.AddDynamic(this, &AOptionMenu::EnableOptionButton);
 		_GameStateManager->OnEnterStartMenuStat.AddDynamic(this, &AOptionMenu::EnableOptionButton);
-		_GameStateManager->OnExitGameState.AddDynamic(this, &AOptionMenu::DisableOptionButton);
+		//_GameStateManager->OnExitGameState.AddDynamic(this, &AOptionMenu::DisableOptionButton);
 		_GameStateManager->OnExitStartMenuState.AddDynamic(this, &AOptionMenu::DisableOptionButton);
 	}
 
@@ -158,11 +158,11 @@ void AOptionMenu::OnBotMenuStateChange(EBotMenuState BotMenuState)
 	if (!_GameStateManager || _GameStateManager->GetGameState() != EGameState::Game) return;
 	if (BotMenuState == EBotMenuState::Home)
 	{
-		EnableOptionButton();
+		//EnableOptionButton();
 	}
 	else
 	{
-		DisableOptionButton();
+		//DisableOptionButton();
 	}
 }
 

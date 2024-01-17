@@ -9,6 +9,8 @@ class AGameStateManager;
 class AOptionMenu;
 class UButton;
 class UTextBlock;
+class UTexture2D;
+class UImage;
 
 UCLASS()
 class VISITPLUGINRUNTIME_API AStartMenu : public AActor
@@ -24,6 +26,9 @@ private:
 	UPROPERTY(EditAnywhere, Category = "VisitData/ProjectName")
 	FString _ProjectName = "Project Name";
 
+	UPROPERTY(EditAnywhere, Category = "VisitData/ProjectImage")
+	UTexture2D* _ProjectImage = nullptr;
+
 	UPROPERTY()
 	AGameStateManager* _GameStateManager = nullptr;
 
@@ -34,6 +39,8 @@ private:
 	UButton* _ButtonStart = nullptr;
 	UPROPERTY()
 	UTextBlock* _TextBlockProjectName = nullptr;
+	UPROPERTY()
+	UImage* _ImageProject = nullptr;
 
 public:	
 	AStartMenu();

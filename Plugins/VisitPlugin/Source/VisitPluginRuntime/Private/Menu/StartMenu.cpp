@@ -6,6 +6,7 @@
 #include "Blueprint/UserWidget.h"
 #include "Components/Button.h"
 #include "Components/TextBlock.h"
+#include "Components/Image.h"
 
 AStartMenu::AStartMenu()
 {
@@ -73,6 +74,12 @@ void AStartMenu::OpenStartMenu()
 	if (_TextBlockProjectName)
 	{
 		_TextBlockProjectName->SetText(FText::FromString(_ProjectName));
+	}
+
+	_ImageProject = Cast<UImage>(_StartMenuWidget->GetWidgetFromName(FName("Image_Project")));
+	if (_ImageProject)
+	{
+		_ImageProject->SetBrushFromTexture(_ProjectImage);
 	}
 }
 

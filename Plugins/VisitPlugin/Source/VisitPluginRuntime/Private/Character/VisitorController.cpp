@@ -54,6 +54,8 @@ void AVisitorController::BeginPlay()
 		bEnableTouchOverEvents = false;
 		break;
 	case EInputType::IT_Touch:
+		SetInputMode(FInputModeGameAndUI());
+
 		SetShowMouseCursor(false);
 		bEnableClickEvents = false;
 		bEnableMouseOverEvents = false;
